@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+
+.container{
+  padding:-20px;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background-color:none;
+  font-family: 'Open Sans', sans-serif;
+ }
+
+
+}
+ .x_axis{
+  fill: #FF6699 ;
+  stroke: red;
+  stroke-width: 0.5px;
+  shape-rendering: crispEdges;
+  
+}
+.axis path, .axis line {
+  fill: none;
+  stroke: #000;
+  stroke-width: .5px;
+  shape-rendering: crispEdges;
+  
+}
+.axis text, .band_wavelengthTextTitle, .band_reflectanceTextTitle
+ {
+    font-family: sans-serif;
+    font-size: 11px;
+}
+#draggable {  padding: 0.5em; stroke:black; stroke-width:5px;;}
+
+.dataline {
+    z-index:999;
+}
+
+rect {
+  fill: steelblue;
+  stroke: black;
+  stroke-width: 0.1px;
+  fill-opacity: 0.1;
+}
+
+path.dataline {
+  z-index:9999;
+  fill: none;
+  stroke: darkblue;
+  stroke-width: 3.5px;
+}
+.band1style, 
+.bandstyle 
+{
+  
+   fill: #006699 ;
+   stroke: #006699;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band2style{
+  
+   fill: #33CC66 ;
+   stroke: #33CC66;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band3style{
+  
+   fill: #FF3300 ;
+   stroke: #FF3300;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band4style{
+  
+   fill: #FF3366 	 ;
+   stroke: #FF3366 	;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band5style{
+  
+   fill: #990066 ;
+   stroke: #990066;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+} 
+.band6style{
+  
+   fill: #6666CC 	 ;
+   stroke: #6666CC 	;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band7style{
+  
+   fill: #666699 ;
+   stroke: #666699;
+   stroke-width: 0.2px;
+   fill-opacity:0.2;
+}
+.band8style{
+  
+   fill: #FF00FF ;
+   stroke: #FF00FF;
+   stroke-width: 0.5px;
+   fill-opacity:0.5;
+}
+.dot {
+  fill: white;
+  stroke: darkblue;
+  stroke-width: 1.5px;
+}
+
+svg , g
+	{
+	  margin:0px;
+	  padding:20px;
+		border: solid 1px black;
+		border-radius: 15px;
+		stroke-width: 0px;
+	}
+	circle {
+		fill: steelblue;
+		fill-opacity: .8;
+	}
+</style>
+
+                                        <head>
+                                         <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+                                         
+                                         <title>data</title>
+                                        
+					<link rel="stylesheet" href="CloudMade-Leaflet-v0.3.1/dist/leaflet.css" />
+				  <link rel="stylesheet" href="http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css" />
+            <script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+            <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>	
+					<!--[if lte IE 8]>
+					<link rel="stylesheet" href="http://openIR.media.mit.edu/html_src/CloudMade-Leaflet-v0.3.1/dist/leaflet.ie.css" />
+					<![endif]-->  
+						<script type="text/javascript" src="	d3-master/d3.v2.js"></script>
+        		
+						                                 
+					<script type="text/javascript" src="CloudMade-Leaflet-v0.3.1/dist/leaflet.js"></script>
+           <link rel="stylesheet" href="CloudMade-Leaflet-v0.3.1/dist/dist/leaflet.css" />
+          <!--[if lte IE 8]><link rel="stylesheet" href="../dist/leaflet.ie.css" /><![endif]-->
+                                </head>
+                           
+                                    </style>
+
+                                    <div class="container">
+                                         <div id="draggable" class="ui-widget-content">
+                                          <div id="graph" style="position: absolute; z-index: 999; top:0;  padding:0px; margin:100px; left:0; background-color:#fefefe; -moz-border-radius: 15px; color: white; border-radius: 15px;"></div>
+                                        </div>
+                                          
+                                           <div id="map" style="width:100%;
+                                             height: 100%;  top: 0; left: 0;position:absolute; z-index:1;"></div>
+                                         <div id="right" style="margin:100px;">
+                                           <canvas id="canvas111" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas> 
+                                           <canvas id="canvas222" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas333" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas444" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas555" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas666" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas777" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="canvas888" width="256px" height="256px" style="top:400px;  position:relative; width:256px; height:256px; z-index:11 "></canvas>
+                                           <canvas id="pointcanvas" width="256px" height="256px" style="top:400px; position:relative; width:256px; height:256px; z-index:99 "></canvas>
+                                          </div>
+                                    </div>
+                              
+                                    <script>
+                                    $(function() {
+                                        $( "#draggable" ).draggable();
+                                    });
+                                    </script>
+                                
+                                  
+                                          <script>
+                                                                                  function deg2rad (angle) {
+                                                                                    // http://kevin.vanzonneveld.net
+                                                                                    // +   original by: Enrique Gonzalez
+                                                                                    // +     improved by: Thomas Grainger (http://graingert.co.uk)
+                                                                                    // *     example 1: deg2rad(45);
+                                                                                    // *     returns 1: 0.7853981633974483
+                                                                                    return angle * .017453292519943295; // (angle / 180) * Math.PI;
+                                                                                  }
+                                                                                  function ImageExist(url) 
+                                                                                  {
+                                                                                     var img = new Image();
+                                                                                     img.src = url;
+                                                                                     return img.height != 0;
+                                                                                  }
+
+                                                                                  //demo function now all functionality is running though this function. 
+                                                                                  // function getTileNumber(lat, lon, zoom) {
+                                                                                  //                                                                                   // pseudo code
+                                                                                  //                                                                                   // n = 2 ^ zoom
+                                                                                  //                                                                                   // xtile = n * ((lon_deg + 180) / 360)
+                                                                                  //                                                                                   // ytile = n * (1 - (log(tan(lat_rad) + sec(lat_rad)) / π)) / 2 
+                                                                                  //                                                                                   // php ytile = floor((1 - log(tan(deg2rad($lat)) + 1 / cos(deg2rad($lat))) / pi()) /2 * pow(2, $zoom));
+                                                                                  // 
+                                                                                  //                                                                                   //console.log("lat: " +lat +" long: "+ lon);
+                                                                                  //                                                                                   var n = Math.pow(2, zoom);
+                                                                                  //                                                                                   var path =  Math.floor( n * ((lon + 180) / 360)) ;
+                                                                                  //                                                                                   var row = Math.floor( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                  //                                                                                    var rowhelper =( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                  //                                                                                   //console.log("Path: " + path +" Row: "+ row);
+                                                                                  // 
+                                                                                  //                                                                                   var ymax = 1 << zoom;
+                                                                                  //                                                                                   var row = -(row-ymax)-1;
+                                                                                  //                                                                                    var ymax = 1 << zoom;
+                                                                                  //                                                                                     var rowhelper = -(rowhelper-ymax)-1;
+                                                                                  // 
+                                                                                  //                                                                                   var pathx = (( n * ((lon + 180) / 360) ) - path ) * 256;
+                                                                                  //                                                                                   var rowy = -( rowhelper - row) * 256;
+                                                                                  //                                                                                    //console.log("Pathx: " + pathx +"px Rowy: "+ rowy+"px");
+                                                                                  // 
+                                                                                  //                                                                                    var img = new Image();
+                                                                                  //                                                                                    //321 
+                                                                                  //                                                                                    //console.log('321/'+zoom+'/'+path+'/'+row+'.png');
+                                                                                  //                                                                                    img.src = '321/'+zoom+'/'+path+'/'+row+'.png';
+                                                                                  //                                                                                    if (ImageExist(img.src)){
+                                                                                  //                                                                                      var context = document.getElementById('canvas').getContext('2d');
+                                                                                  //                                                                                    // console.log(context.width);
+                                                                                  //                                                                                     context.clearRect ( 0 , 0 ,256 , 256 );
+                                                                                  //                                                                                     context.drawImage(img, 0, 0);
+                                                                                  //                                                                                     context.strokeStyle = context.fillStyle = "red";
+                                                                                  //                                                                                     context.rect(pathx-5,rowy-5, 5,5);
+                                                                                  //                                                                                     context.stroke();
+                                                                                  //                                                                                     data = context.getImageData(pathx, rowy, 1, 1).data;
+                                                                                  //                                                                                     //console.log("Red: "+ data[0] + " Green: "+ data[1]+ " Blue: "+ data[2])
+                                                                                  // 
+                                                                                  //                                                                                      return new PathRowXYandData(path, row, pathx, rowy, data );
+                                                                                  //                                                                                    }
+                                                                                  // 
+                                                                                  // 
+                                                                                  //                                                                                    return 0;
+                                                                                  //                                                                                    }
+
+                                                                                  //get TMS Path and Row numbers 
+                                                                                  function getTMSPathAndRow(lat, lon, zoom){ 
+                                                                                     //console.log("lat: " +lat +" long: "+ lon);
+                                                                                      var n = Math.pow(2, zoom);
+                                                                                      var path =  Math.floor( n * ((lon + 180) / 360)) ;
+                                                                                      var row = Math.floor( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                      var rowhelper =( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                      //console.log("Path: " + path +" Row: "+ row);
+
+                                                                                      //invert y axis for TMS. 
+                                                                                      var ymax = 1 << zoom;
+                                                                                      var row = -(row-ymax)-1;
+                                                                                      var ymax = 1 << zoom;
+                                                                                      var rowhelper = -(rowhelper-ymax)-1;
+
+
+                                                                                    return new PathRow(path, row);
+                                                                                    }
+
+                                                                                  // get Path and Row - it is not tms so the y is not inverted. 
+                                                                                    function getPathAndRow(lat, lon, zoom){ 
+                                                                                       // console.log("lat: " +lat +" long: "+ lon);
+                                                                                        var n = Math.pow(2, zoom);
+                                                                                        var path =  Math.floor( n * ((lon + 180) / 360)) ;
+                                                                                        var row = Math.floor( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                         // var rowhelper =( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                        // console.log("Path: " + path +" Row: "+ row);
+
+
+                                                                                        // var pathx = (( n * ((lon + 180) / 360) ) - path ) * 256;
+                                                                                        // var rowy = -( ( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom))) - row) * 256;
+                                                                                        //  console.log("Pathx: " + pathx +"px Rowy: "+ rowy+"px");
+
+                                                                                      return new PathRow(path, row);
+                                                                                      }
+
+                                                                                      function getHistogramWithTMSPathRowXY(lat,lon, zoom){
+                                                                                        // console.log("lat: " +lat +" long: "+ lon);
+                                                                                        var n = Math.pow(2, zoom);
+                                                                                        var path =  Math.floor( n * ((lon + 180) / 360)) ;
+                                                                                        var row = Math.floor( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                        var rowhelper =( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                                                        // console.log("Path: " + path +" Row: "+ row);
+
+                                                                                        var ymax = 1 << zoom;
+                                                                                        var row = -(row-ymax)-1;
+                                                                                        var ymax = 1 << zoom;
+                                                                                        var rowhelper = -(rowhelper-ymax)-1;
+
+                                                                                        var pathx = (( n * ((lon + 180) / 360) ) - path ) * 256;
+                                                                                        var rowy = -( rowhelper - row) * 256;
+                                                                                        // console.log("Pathx: " + pathx +"px Rowy: "+ rowy+"px");
+
+
+                                                                                        //DATA IS ARRAY
+                                                                                        //DATA EXIST
+                                                                                        //GET 321 PIXEL VALUE 
+                                                                                        //GET 754 PIXEL VALUE 
+                                                                                        var histogram=new Array(7);
+                                                                                        
+                                                                                        var img321 = new Image();
+                                                                                        //console.log('321/'+zoom+'/'+path+'/'+row+'.png');
+                                                                                        img321.src = '321/'+zoom+'/'+path+'/'+row+'.png';
+                                                                                        
+                                                                                        var img754 = new Image();
+                                                                                        //console.log('754/'+zoom+'/'+path+'/'+row+'.png');
+                                                                                        img754.src = '754/'+zoom+'/'+path+'/'+row+'.png';
+                                                                                        var img666 = new Image();
+                                                                                        img666.src = '666/'+zoom+'/'+path+'/'+row+'.png';
+                                                                                        // if (ImageExist(img321.src)){
+                                                                                        var context = document.getElementById('pointcanvas').getContext('2d');
+                                                                                        context.clearRect ( 0 , 0 ,256 , 256 );
+                                                                                        context.drawImage(img321, 0, 0);
+                                                                                        
+                                                                                        data = context.getImageData(pathx, rowy, 1, 1).data;
+                                                                                        histogram[0]=data[2]/256;//1
+                                                                                        histogram[1]=data[1]/256;//2
+                                                                                        histogram[2]=data[0]/256;//3
+                                                                                        
+                                                                                        context.clearRect ( 0 , 0 ,256 , 256 );
+                                                                                        context.drawImage(img754, 0, 0);
+                                                                                        context.strokeStyle = context.fillStyle = "darkblue";
+                                                                                        context.rect(pathx-5,rowy-5, 5,5);
+                                                                                        context.stroke();
+                                                                                        data = context.getImageData(pathx, rowy, 1, 1).data;
+                                                                                        histogram[3]=data[2]/256;//4
+                                                                                        histogram[4]=data[1]/256;//5
+                                                                                        //histogram[5]= 0;    //6
+                                                                                        histogram[6]=data[0]/256;//7
+                                                                                        
+                                                                                        context.clearRect ( 0 , 0 ,256 , 256 );
+                                                                                        context.drawImage(img666, 0, 0);
+                                                                                        data = context.getImageData(pathx, rowy, 1, 1).data;
+                                                                                        histogram[5]=data[0]/256;//6
+                                                                                         // console.log("1: "+histogram[0] + " 2: "+ histogram[1]+ " 3: "+ histogram[2] + "4: "+histogram[3] + " 5: "+ histogram[4]+ " 6: "+ histogram[5]+ "7: "+ histogram[6]);
+
+                                                                                        return new PathRowXYandHistogram(path, row, pathx, rowy, histogram); 
+                                                                                        // }
+                                                                                        // return 0
+
+                                                                                     }
+                                                                                     // will return the data of the selected tile with in the datapath /321 etc. 
+                                         function getTMSTileImageDataWithLatLongAndPath(lat,lon, zoom, datapath){
+                                                   // console.log("lat: " +lat +" long: "+ lon);
+                                                   var n = Math.pow(2, zoom);
+                                                   var path =  Math.floor( n * ((lon + 180) / 360)) ;
+                                                   var row = Math.floor( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                   var rowhelper =( ((1 - Math.log(Math.tan(deg2rad(lat)) + 1 / Math.cos(deg2rad(lat))) / Math.PI) /2 * Math.pow(2, zoom)));
+                                                   // console.log("Path: " + path +" Row: "+ row);
+
+                                                   var ymax = 1 << zoom;
+                                                   var row = -(row-ymax)-1;
+                                                   var ymax = 1 << zoom;
+                                                   var rowhelper = -(rowhelper-ymax)-1;
+
+                                                   var pathx = (( n * ((lon + 180) / 360) ) - path ) * 256;
+                                                   var rowy = -( rowhelper - row) * 256;
+                                                   // console.log("Pathx: " + pathx +"px Rowy: "+ rowy+"px");
+                                       
+                                                   var img = new Image();
+                                                   //console.log(datapath+'/'+zoom+'/'+path+'/'+row+'.png');
+                                                   img.src = datapath+'/'+zoom+'/'+path+'/'+row+'.png';
+
+                                                  var imagewidth= imageheight = 256;
+                                                   if (ImageExist(img.src)){
+                                                     var context = document.getElementById(('canvas'+datapath)).getContext('2d');
+                                                     context.clearRect ( 0 , 0 ,256 , 256 );
+                                                     context.strokeStyle = context.fillStyle = "black";
+                                                     context.drawImage(img, 0, 0);
+                                                     context.fillText(datapath+'/'+zoom+'/'+path+'/'+row, 15, 15);
+                                                     context.font = "normal 15px Arial";
+
+                                                     context.rect(0,0, 256,256);
+                                                     var imagedata = context.getImageData(0, 0, 256, 256 ).data;
+                                                     
+                                                     // quickly iterate over all pixels and get only one channel
+                                                    // var singleband=new Array(); 
+                                                    // for(var i = 0, n = imagedata.length; i < n; i += 4) {
+                                                    //    singleband.push(imagedata[imagedata]);
+                                                    //    
+                                                    //  }
+                                                    var histogram = new array256(0);
+                                                    for(var i = 0, n = imagedata.length; i < n; i += 4) {
+                                                      
+                                                      if(histogram[imagedata[i]]>=256){}
+                                                      
+                                                      else{histogram[imagedata[i]]++;}
+                                                     //console.log(histogram); 
+                                                    }
+                                                    histogram[0]=0;
+                                                    
+                                                   var largest = Math.max.apply(Math, histogram); // 306
+                                                   
+                                                    for(var i = 0, n = histogram.length; i < n; ++i) {
+                                                      histogram[i]=histogram[i]/(256);
+                                                    }
+                                                    // or iterate over all pixels based on x and y coordinates.
+                                                           // loop through each row
+                                                           // for(var y = 0; y < imageheight; y++) {
+                                                           //    // loop through each column
+                                                           //    for(var x = 0; x < imagewidth; x++) {
+                                                           //      singleband.push(imagedata[i]);
+                                                           //      // var red = data[((sourceWidth * y) + x) * 4];
+                                                           //      // var green = data[((sourceWidth * y) + x) * 4 + 1];
+                                                           //      // var blue = data[((sourceWidth * y) + x) * 4 + 2];
+                                                           //      // var alpha = data[((sourceWidth * y) + x) * 4 + 3];
+                                                           //    }
+                                                           //  }
+                                                    return histogram; 
+                                                 }
+                                                  var context = document.getElementById(('canvas'+datapath)).getContext('2d');
+                                                  context.clearRect ( 0 , 0 ,256 , 256 );
+                                                  context.strokeStyle = context.fillStyle = "red";
+                                                  context.fillText(datapath+'/'+zoom+'/'+path+'/'+row, 15, 15);
+                                                  context.font = "normal 15px Arial";
+                                                  context.rect(0,0, 256,256);
+                                                  context.stroke();
+                                                  var emptyband=new Array(); 
+                                                 return emptyband; 
+                                                                                                                                  
+                                         }
+                                       function Color(r,g,b)
+                                             {
+                                               this.Red = r;
+                                               this.Green = g;
+                                               this.Blue = b;
+                                             }
+
+                                              function PathAndRow(path, row )
+                                              {
+                                                var pathandrow = {
+                                                  path : path,
+                                                  row: row
+                                                };
+                                                this.Path = path;
+                                                this.Row = row;
+                                              }
+
+                                          
+                                               function PathRowXYandHistogram(path, row, x, y, data )
+                                                {
+                                                  var pathandrow = {
+                                                    path : path,
+                                                    row: row
+                                                  };
+                                                  this.Path = path;
+                                                  this.Row = row;
+                                                  this.x = x; 
+                                                  this.y = y;
+                                                  this.Histogram = data; 
+
+                                                }
+                                          
+                                          
+                                              map = new L.Map('map');
+                                               // create OSM tile layer with correct attribution
+                                               var osmUrl='http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png';
+                                               var osmAttrib='Map data Â© OpenStreetMap contributors';
+                                               var osm = new L.TileLayer(osmUrl, {minZoom: 1, maxZoom: 18, attribution: osmAttrib});
+
+                                               // start the map in specified location
+                                               map.setView(new L.LatLng(40.77 , -73.98),10);
+                                               map.addLayer(osm);
+
+                                               // add 321  layer
+                                                var layer321URL = '321/{z}/{x}/{y}.png';
+                                               var layer321 = new L.TileLayer(layer321URL, {opacity: 0.5, maxZoom: 18, scheme:'tms'});
+                                                map.addLayer(layer321);
+                                               
+                                                var tilegrid = new L.TileLayer.Canvas( layer321URL, { maxZoom: 18, scheme:'tms'});
+                                                  tilegrid.drawTile = function(canvas, tilePoint, zoom) {
+                                                 var ctx = canvas.getContext('2d');
+
+                                                 ctx.strokeStyle = ctx.fillStyle = "black";
+                                                 ctx.rect(0,0, 256,256);
+                                                 ctx.stroke();
+
+                                                 //invert coordinates for tms path and row identification. 
+                                                 var ymax = 1 << zoom;
+                                                 var tmsy = -(tilePoint.y-ymax)-1;
+
+                                                 ctx.fillText('(' + tilePoint.x + ', ' + tmsy + ')',5,10);
+                                                 };
+
+                                                 map.addLayer(tilegrid);
+
+
+
+
+                                                var baselayers= {
+                                                     "Open Street Maps": osm,
+                                                    "True Color": layer321
+                                                    };                                           
+                                               var overlays = { 
+                                                 "map": osm , 
+                                                 "tilegrid": tilegrid,
+                                                 "True Color": layer321
+                                                 };
+
+                                                var layersControl = new L.Control.Layers( baselayers, overlays);
+
+                                                map.addControl(layersControl);
+
+                                                   var zoom= map.getZoom();
+                                          	/* Initialize the SVG layer */
+                                          	map._initPathRoot()    
+
+                                          	/* We simply pick up the SVG from the map object */
+                                            var svg = d3.select("#graph").select("svg"),
+                                            g = svg.append("g");
+                                          
+                                           function randomData() {
+                                                                                          return d3.range(0).map(function(i) {
+                                                                                              return {x: i*1.2/10,  y: 0};
+                                                                                          });
+                                                                                      }
+                                                                                               
+                                                  
+                                            var data = randomData();
+                                            // 
+                                            var margin = {top: 70, right: 10, bottom: 50, left: 50},
+                                                 width = 640 - margin.left - margin.right,
+                                                 height =275.0 - margin.top - margin.bottom;
+                                             // 
+                                            var x = d3.scale.linear()
+                                                  .domain([0,2.35]) //change this to 12.35 
+                                                  .range([0, width])
+                                                  ;
+                                                 
+                                            var y = d3.scale.linear()
+                                                  .domain([0, 1])
+                                                  .range([height, 0]);
+  
+                                           var xAxis = d3.svg.axis()
+                                             .scale(x)
+                                             .orient("bottom");
+
+                                          var yAxis = d3.svg.axis()
+                                             .scale(y)
+                                             .orient("left");
+                                            
+                                           
+                                            // var line = d3.svg.line()
+                                            //                                              .x(function(d) { return x(d.x); })
+                                            //                                              .y(function(d) { return y(d.y); });
+                                         
+                                            var svg = d3.select("#graph").append("svg")
+                                                .datum(data)
+                                                .attr("width", width + margin.left + margin.right)
+                                                .attr("height", height + margin.top + margin.bottom)
+                                              .append("g")
+                                                .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+                                              svg.append("g")
+                                              .attr("class", "axis")
+                                              .attr("transform", "translate(0," + height + ")")
+                                              .call(xAxis);
+
+                                              svg.append("g")
+                                              .attr("class", "axis")
+                                              .call(yAxis);
+                                          
+                                             
+
+                                    //band 1 (0.45-0.52 μm, blue-green)
+                                      //band 2 (0.52-0.60 μm, green)
+                                      //band 3 (0.63-0.69 μm, red)
+                                      //band 4 (0.76-0.90 μm, near infrared)
+                                      //band 5 (1.55-1.75 μm, mid-infrared)
+                                      //band 6 (10.40-12.50 μm, thermal infrared)
+                                      //band 7 (2.08-2.35 μm mid-infrared) 
+                                          var dataset = [
+                                             { xs:0.45, xe:0.52, text:"1"},
+                                             { xs:0.52, xe:0.60, text:"2"}, 
+                                             { xs:0.63, xe:0.69, text:"3" },
+
+                                             { xs:0.76, xe:0.90, text:"4" },
+                                             { xs:1.55, xe:1.75, text:"5" },
+                                             { xs:2.08, xe:2.35, text:"7" },  
+                                             // { xs:0.52, xe:0.90, text:"8"},
+                                             { xs:10.40, xe:12.50, text:"6" },
+                                           
+                                          
+                                             ];
+                                              // 
+                                        function histogramData(data) {
+                                          
+                                          var histogramdata = [
+                                          // { x:0, xe:0, y:0, text:"0"},
+                                             { x:0.45, xe:0.52, y:data.Histogram[0], text:"1"},
+                                             { x:0.52, xe:0.60, y:data.Histogram[1], text:"2"}, 
+                                             { x:0.63, xe:0.69, y:data.Histogram[2], text:"3" },
+
+                                             { x:0.76, xe:0.90,  y:data.Histogram[3], text:"4" },
+                                             { x:1.55, xe:1.75,  y:data.Histogram[4],text:"5" }, 
+                                              { x:2.08, xe:2.35,  y:data.Histogram[6], text:"7" },
+                                             // {x:0.52, xe:0.90, y:0, text:"8"},
+                                             { x:10.40, xe:12.50,  y:data.Histogram[5],text:"6" }, 
+                                          
+                                             ];
+                                            return histogramdata;
+                                          }
+                                          
+                                        var bandrect= svg.selectAll("rect.bands")
+                                             .data(dataset)
+                                             .enter().append("rect")
+                                             .attr("x", function(d) { return x(d.xs) }) //x(d) scale according to x
+                                             .attr("y", -20)
+                                             .attr("width", function(d) { return x(d.xe - d.xs); })
+                                             .attr("height", 220);
+                                        var text =  svg.selectAll("band_text")
+                                               .data(dataset)
+                                               .enter()
+                                               .append("text")
+                                               .text(function(d) { return d.text; })
+                                               .attr("x", function(d) {return x(d.xs); })
+                                               .attr("y", function(d) {return y(1.15)})
+                                               // .attr("text-anchor", "middle")
+                                               .attr("font-family", "sans-serif")
+                                               .attr("font-size", "12px")
+                                               .attr("fill", "black");
+                                               
+                                  
+                                  var text = svg.append("text")    
+                                   .attr("class", "band_wavelengthTextTitle")
+                                   .attr("text-anchor", "middle")
+                                   .attr("x", x(1.2))
+                                   .attr("dy", y(-0.2))
+                                   // .attr("transform", "rotate(-90)")
+                                   .text("wavelength")
+                                   text = svg.append("text")
+                                   .attr("class", "band_reflectanceTextTitle")
+                                   .attr("text-anchor", "end")
+                                   .attr("x", x(-.2))
+                                   .attr("dy", y(1.25 ))
+                                   .attr("transform", "rotate(-90)")
+                                   .text("reflectance");
+                                    text = svg.append("text")
+                                    .attr("class", "graphTitle")
+                                    .attr("text-anchor", "middle")
+                                    .attr("x", x(1))
+                                    .attr("dy", y(1.35))
+                                    .text("Reflectance / Wavelength v1 (draggable)");
+                                         
+                                        var databand1, databand2, databand3, databand4, databand5, databand6, databand7, databand8 ; 
+                                        var datasize= 256;
+                                        databand1 = new array256(0);
+                                        databand2 = new array256(0);
+                                        databand3 = new array256(0);
+                                        databand4 = new array256(0);
+                                        databand5 = new array256(0);
+                                        databand6 = new array256(0);
+                                        databand7 = new array256(0);
+                                        databand8 = new array256(0);
+
+                              
+
+                                        // var band1rect = svg.selectAll("rect.band")
+                                        //                                             .data(databand1)
+                                        //                                             .enter().append("rect")
+                                        //                                             .attr("class", "band1")
+                                        //                                             .attr("x", x(0.45) ) //x(d) scale according to x
+                                        //                                             .attr("y", y(0) )
+                                        //                                             .attr("width", 0.52-0.45/databand1.length)
+                                        //                                             .attr("height", (2));
+                                        
+                                       var band10 = d3.svg.line()
+                                       .x(function(d,i) {  return x(d) })
+                                       .y(function(d) { return y(d); });
+                                       svg.append("path")
+                                          .attr("class", "bandstyle")
+                                          .attr("d", band10);
+       
+                                      var band2 = d3.svg.line()
+                                          .x(function(d,i) {  return x(d) })
+                                          .y(function(d) { return y(d); });
+                                       svg.append("path")
+                                          .attr("class", "band2style")
+                                          .attr("d",band2)
+
+
+                                     var band3 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band3style")
+                                    .attr("d",band3)
+                                    
+                                    var band4 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band4style")
+                                    .attr("d",band4)
+                                    
+                                    var band5 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band5style")
+                                    .attr("d",band5)
+                                    
+                                    var band6 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band6style")
+                                    .attr("d",band6)
+                                    
+                                    var band7 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band7style")
+                                    .attr("d",band7)
+                                    
+                                    var band8 = d3.svg.line()
+                                    .x(function(d,i) {  return x(d) })
+                                    .y(function(d) { return y(d); });
+                                    svg.append("path")
+                                    .attr("class", "band8style")
+                                    .attr("d",band8)
+
+
+                                              var Spectraldataline = d3.svg.line()
+                                                   .x(function(d) { return x(d.xe-d.x); })
+                                                   .y(function(d) { return y(d.y); });    
+                                              svg.append("path")
+                                                .attr("class", "dataline")
+                                                .attr("d",Spectraldataline)
+   
+                                                
+                                       
+                                                
+                                                
+                                                  
+                                            svg.selectAll(".dot")
+                                                .data(dataset)
+                                                .enter().append("circle")
+                                                .attr("class", "dot")
+                                                .attr("cx",function(d){ return x(d.xs+(d.xe-d.xs)/2);})
+                                                .attr("cy", y(0))
+                                                .attr("r", 3.5);
+                                                
+
+                                            var popup = new L.Popup();
+                                            
+                                          //inti a 256 array. 
+                                            function array256(default_value) {
+                                              arr = [];
+                                              for (var i=0; i<256; i++) { arr[i] = default_value; }
+                                              //add 0 at start and 0 at the end for clean fill 
+                                              arr.unshift(0);
+                                              arr.push(0)
+                                              return arr;
+                                            }
+                                            
+                                        
+                                            function update() {
+                                              
+                                              d3.selectAll(".dot")
+                                                .data(data)
+                                                .attr("cy",function(d) { return y(d.y) }) // line.y())
+                                                .attr("r", 3.5);
+                                   
+                                          
+                                            Spectraldataline = d3.svg.line()
+                                              .x(function(d) { return x(d.x+(d.xe-d.x)/2); })
+                                              .y(function(d) { return y(d.y); })
+                                              // .interpolate("basis");
+                                            d3.selectAll("path.dataline")    
+                                                   .data([data])            
+                                                   .attr("d", Spectraldataline) ;
+                                                
+                                              // band1rect
+                                              //                                        .data(databand1)
+                                              //                                        .attr("x", function(d,i) {  return x(0.45 + (0.07/256 *i) )}) //x(d) scale according to x
+                                              //                                        .attr("y", function(d) {return (y(d)) })
+                                              //                                        .attr("width", 1 )
+                                              //                                        .attr("height", 1);        
+                                              //band 1 0.45 - 0.52 
+                                             band10 = d3.svg.line()
+                                             .x(function(d,i) { return x(0.45 + (0.07/256 *i) )})
+                                             .y(function(d) { return y(d); })
+                                             .interpolate("basis");
+                                              d3.selectAll(".bandstyle")    
+                                              .data([databand1])            
+                                              .attr("d", band10);
+                                            
+                                              band2 = d3.svg.line()
+                                              .x(function(d,i) { return x(0.52 + (0.07/256 *i)) }) 
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band2style")    
+                                              .data([databand2])            
+                                              .attr("d", band2) ;
+
+                                              band3 = d3.svg.line()
+                                              .x(function(d,i) {return x(0.63 + ((0.69-0.62)/256 *i)) })
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band3style")    
+                                              .data([databand3])            
+                                              .attr("d", band3);
+                                              
+                                              band4 = d3.svg.line()
+                                              .x(function(d,i) {return x(0.76 + ((0.90-0.76)/256 *i)) }) 
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band4style")    
+                                              .data([databand4])            
+                                              .attr("d", band4) ;
+                                              
+                                              band5 = d3.svg.line()
+                                              .x(function(d,i) {  return x(1.55 + ((1.75-1.55)/256 *i)) })
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band5style")    
+                                              .data([databand5])            
+                                              .attr("d", band5);
+                                              
+                                              band6 = d3.svg.line()
+                                              .x(function(d,i) { return x(10.40 + ((12.50-10.40)/256 *i)) })
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                               d3.selectAll(".band6style")    
+                                              .data([databand6])            
+                                              .attr("d", band6);
+                                                      
+                                              band7 = d3.svg.line()
+                                              .x(function(d,i) { return x(2.08 + ((2.35-2.08)/256 *i)) }) 
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band7style")    
+                                              .data([databand7])            
+                                              .attr("d", band7);
+                                              
+                                              band8 = d3.svg.line()
+                                              .x(function(d,i) {return x(0.63 + (0.07/256 *i)) })
+                                              .y(function(d) { return y(d); })
+                                              .interpolate("basis");
+                                              d3.selectAll(".band8style")    
+                                                .data([databand8])            
+                                                .attr("d", band8);
+                   
+                                            } 
+                                            
+                                           
+                                                                            
+                                            map.on('click', function(e) {
+                                            var pnr = getHistogramWithTMSPathRowXY(e.latlng.lat, e.latlng.lng, map.getZoom());
+                                              databand1 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '111');
+                                              databand2 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '222');
+                                              databand3 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '333');
+                                              databand4 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '444');
+                                              databand5 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '555');
+                                              databand6 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '666');
+                                              databand7 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '777');
+                                             // databand8 = getTMSTileImageDataWithLatLongAndPath(e.latlng.lat, e.latlng.lng, map.getZoom(), '888');
+                                              
+                                           // console.log(databand1);
+                                            // data = pnr.Histogram;
+                                              popup.setLatLng(e.latlng);
+                                              popup.setContent("You clicked the map at " + e.latlng.toString() + 
+                                              // "<br> and path and row numbers: " + pnr.Path+ ", "+ pnr.Row +
+                                              "<br> layerPoint: " + e.layerPoint +
+                                              "<br> containerPoint: " + e.containerPoint
+                                              );
+                                              map.openPopup(popup);
+                                             
+                                             
+                                              data = histogramData(pnr);//randomData();
+                                               update();
+
+                                            });
+
+
+                                          </script>
+                                </body>
+                                </html>
