@@ -56,26 +56,31 @@ createTMSforBandWithFileName(){
 	
 		# warp with alpha
 		gdalwarp -dstalpha -srcnodata "0 0 0" -dstnodata "0 0 0" -co "TILED=YES" "$BAND" "$BANDFILE"
-		# 	 	listgeo $BAND > $BAND".txt" 
+		listgeo $BAND > $BAND".txt" 
 		# 
 		# # #do color correction: #####################################################################
 		# 	 	#convert "$BANDFILE" -normalize "$BANDFILE"
-		#  convert "$BANDFILE" -equalize "$BANDFILE"
-		# BANDFILEREGEOREFERENCED="$BANDFILE.test"
-		# geotifcp -g $BAND".txt" "$BANDFILE" "$BANDFILEREGEOREFERENCED"
-		# rm $BAND".txt" 
+	  	# convert "$BANDFILE" -equalize "$BANDFILE"
+		# convert "$BANDFILE" -contrast-stretch 1x1% -linear-stretch 1x1% "$BANDFILE"
+		# convert "$BANDFILE" -level 10% "$BANDFILE"
+		convert "$BANDFILE" -auto-level  "$BANDFILE"
+		BANDFILEREGEOREFERENCED="$BANDFILE.geo.tif"
+		geotifcp -g $BAND".txt" "$BANDFILE" "$BANDFILEREGEOREFERENCED"
+		
+	 	rm $BAND".txt" 
 		#############################################################################################
 		#
 		# create TMS layer 
-		python /Library/Frameworks/GDAL.framework/Versions/1.9/Programs/gdal2tiles.py --srcnodata="0,0,0" -z "$minZoom-$maxZoom" "$BANDFILE" "$BANDDIR"
-		
+		python /Library/Frameworks/GDAL.framework/Versions/1.9/Programs/gdal2tiles.py --srcnodata="0,0,0" -z "$minZoom-$maxZoom" "$BANDFILEREGEOREFERENCED" "$BANDDIR"
+		rm $BANDFILEREGEOREFERENCED
 		#fi 
-		# exit 0
+	
 		
 		# rm "$BAND"
 	    rm  "$BANDFILE"
 		#rezip file when done to decrease repository size
 		gzip -vf -9 "$BAND" "$BAND.gz"
+	
 	fi
 }
 
@@ -88,7 +93,7 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=5
+maxZoom=10
 minZoom=5
 
 n=-1

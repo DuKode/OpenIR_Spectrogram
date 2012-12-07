@@ -411,8 +411,8 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=14
-minZoom=12
+maxZoom=10
+minZoom=5
 deps # check dependencies imagemagick-convert 
  n=-1
  for i in ${args[@]}; do
