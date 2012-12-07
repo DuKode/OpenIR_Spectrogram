@@ -1,53 +1,28 @@
-
 <?php
+// author ilias koen 
+// ilias.koen@dukodestudio.com
+// the dukode studio 2012
+// http://dukode.com 
 
 $file = $_REQUEST['pathfile'] ;
-// echo $dir;
-$filesArray = array(); 
-// $Counter = 0; 
+$spectralData = array(); 
 $lines = file($file);
-echo $lines;
-
-//$files = scandir($dir); 
-// 
-// function get_value_of($name)
-// {
-//      $lines = file('yourfile.txt');
-//      foreach (array_values($lines) AS $line)
-//      {
-//           list($key, $val) = explode('=', trim($line) );
-//           if (trim($key) == $name)
-//           {
-//                 return $val;
-//           }
-//      }
-//      return false;
-// } 
-// 
-// // $filenames = explode(" ", $files);
-// foreach ($files as &$file) { 
-//     if ($file!='.' && $file!='..' ) { 
-//         // $filesArray[$Counter] = $file; 
-//         // echo $filesArray[$Counter].''; 
-//         // $Counter++;
-// 
-// 	 
-// 		//echo $lines; 
-// 		 foreach (array_values($lines) AS $line)
-// 			 	     {
-// 			 	      //   echo $line;
-// 			 	     }
-// 		 // 	
-// 		$bus = array(
-// 		        'name' => $file,
-// 		        'path' => $dir
-// 		    );
-// 		array_push($filesArray, $bus);
-//     }
-// } 
-// //printf($filesArray);
-// echo json_encode($filesArray); 
-
+$name = $lines[0];
+$d = array();
+for ($i=27; $i <sizeof($lines);++$i){
+    $name = (string) ($lines[0]);
+		
+	$data= explode('	', $lines[$i]);
+	$wave = (float) ($data[0]);
+	$refl = (float) ($data[1]); 
+	$d = array(
+		'name' => $name,
+		'wavelength' => $wave,
+		'reflectance' => $refl
+	    );
+	array_push($spectralData, $d);
+   }
+echo json_encode($spectralData); 
 
 ?>
 

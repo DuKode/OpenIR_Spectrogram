@@ -93,8 +93,8 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=10
-minZoom=5
+maxZoom=18
+minZoom=18
 
 n=-1
  for i in ${args[@]}; do
