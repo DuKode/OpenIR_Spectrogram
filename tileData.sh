@@ -56,23 +56,24 @@ createTMSforBandWithFileName(){
 	
 		# warp with alpha
 		gdalwarp -dstalpha -srcnodata "0 0 0" -dstnodata "0 0 0" -co "TILED=YES" "$BAND" "$BANDFILE"
-		listgeo $BAND > $BAND".txt" 
+		#listgeo $BAND > $BAND".txt" 
 		# 
 		# # #do color correction: #####################################################################
-		# 	 	#convert "$BANDFILE" -normalize "$BANDFILE"
+		# #convert "$BANDFILE" -normalize "$BANDFILE"
 	  	# convert "$BANDFILE" -equalize "$BANDFILE"
 		# convert "$BANDFILE" -contrast-stretch 1x1% -linear-stretch 1x1% "$BANDFILE"
 		# convert "$BANDFILE" -level 10% "$BANDFILE"
-		convert "$BANDFILE" -auto-level  "$BANDFILE"
-		BANDFILEREGEOREFERENCED="$BANDFILE.geo.tif"
-		geotifcp -g $BAND".txt" "$BANDFILE" "$BANDFILEREGEOREFERENCED"
 		
-	 	rm $BAND".txt" 
+		#convert "$BANDFILE" -auto-level  "$BANDFILE"
+		#BANDFILEREGEOREFERENCED="$BANDFILE.geo.tif"
+		#geotifcp -g $BAND".txt" "$BANDFILE" "$BANDFILEREGEOREFERENCED"
+		
+	 	#rm $BAND".txt" 
 		#############################################################################################
 		#
 		# create TMS layer 
-		python /Library/Frameworks/GDAL.framework/Versions/1.9/Programs/gdal2tiles.py --srcnodata="0,0,0" -z "$minZoom-$maxZoom" "$BANDFILEREGEOREFERENCED" "$BANDDIR"
-		rm $BANDFILEREGEOREFERENCED
+		python /Library/Frameworks/GDAL.framework/Versions/1.9/Programs/gdal2tiles.py --srcnodata="0,0,0" -z "$minZoom-$maxZoom" "$BANDFILE" "$BANDDIR"
+		#rm $BANDFILEREGEOREFERENCED
 		#fi 
 	
 		
@@ -93,8 +94,8 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=18
-minZoom=18
+maxZoom=15
+minZoom=11
 
 n=-1
  for i in ${args[@]}; do
@@ -122,37 +123,37 @@ n=-1
   		# echo "*******\n$FILES\n"
   		# RESULT="found"
   		for i in ${TILEFILESARRAY[@]}; do
-			if [[ "$i" == *B10* ]] || [[  "$i" == *10.tif* ]] ||  [[ "$i" == *01.tif* ]] || [[ "$i" == *nn1.tif* ]] || [[ "$i" == *01.gz* ]]; then
+			if [[ "$i" == *B10* ]] || [[  "$i" == *10.tif* ]] ||  [[ "$i" == *01.tif* ]] || [[ "$i" == *B1.TIF* ]] || [[ "$i" == *nn1.tif* ]] || [[ "$i" == *01.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			# B20
-			elif [[ "$i" == *B20* ]] || [[  "$i" == *20.tif* ]] ||  [[ "$i" == *02.tif* ]] || [[ "$i" == *nn2.tif* ]] || [[ "$i" == *02.gz* ]]; then
+			elif [[ "$i" == *B20* ]] || [[  "$i" == *20.tif* ]] ||  [[ "$i" == *02.tif* ]] || [[ "$i" == *B2.TIF* ]] ||  [[ "$i" == *nn2.tif* ]] || [[ "$i" == *02.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			#B30
-			elif [[ "$i" == *B30* ]] || [[  "$i" == *30.tif* ]] ||  [[ "$i" == *03.tif* ]] || [[ "$i" == *nn3.tif* ]] || [[ "$i" == *03.gz* ]]; then
+			elif [[ "$i" == *B30* ]] || [[  "$i" == *30.tif* ]] ||  [[ "$i" == *03.tif* ]] || [[ "$i" == *B3.TIF* ]] ||  [[ "$i" == *nn3.tif* ]] || [[ "$i" == *03.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			#B40
-			elif [[ "$i" == *B40* ]] || [[  "$i" == *40.tif* ]] ||  [[ "$i" == *04.tif* ]] || [[ "$i" == *nn4.tif* ]] || [[ "$i" == *04.gz* ]]; then
+			elif [[ "$i" == *B40* ]] || [[  "$i" == *40.tif* ]] ||  [[ "$i" == *04.tif* ]] || [[ "$i" == *B4.TIF* ]] ||  [[ "$i" == *nn4.tif* ]] || [[ "$i" == *04.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			#B50
-			elif [[ "$i" == *B50* ]] || [[  "$i" == *50.tif* ]] ||  [[ "$i" == *05.tif* ]] || [[ "$i" == *nn5.tif* ]] || [[ "$i" == *05.gz* ]]; then
+			elif [[ "$i" == *B50* ]] || [[  "$i" == *50.tif* ]] ||  [[ "$i" == *05.tif* ]] || [[ "$i" == *B5.TIF* ]] ||  [[ "$i" == *nn5.tif* ]] || [[ "$i" == *05.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			#B60
-			elif [[ "$i" == *B60* ]] || [[  "$i" == *60.tif* ]] ||  [[ "$i" == *06.tif* ]] || [[ "$i" == *nn6.gz* ]] || [[ "$i" == *06.gz* ]]; then
+			elif [[ "$i" == *B60* ]] || [[  "$i" == *60.tif* ]] ||  [[ "$i" == *06.tif* ]] || [[ "$i" == *B6.TIF* ]] ||  [[ "$i" == *nn6.gz* ]] || [[ "$i" == *06.gz* ]]; then
 				createTMSforBandWithFileName $i 
 			#B61
-			elif [[ "$i" == *B61* ]] || [[  "$i" == *61.tif* ]] ||  [[ "$i" == *61.tif* ]] || [[ "$i" == *nn61.tif* ]] || [[ "$i" == *61.gz* ]]; then
+			elif [[ "$i" == *B61* ]] || [[  "$i" == *61.tif* ]] ||  [[ "$i" == *61.tif* ]] || [[ "$i" == *B6_VCID_1.TIF* ]] ||  [[ "$i" == *nn61.tif* ]] || [[ "$i" == *61.gz* ]]; then
 				createTMSforBandWithFileName $i 
 
-			elif [[ "$i" == *B62* ]] || [[  "$i" == *62.tif* ]] ||  [[ "$i" == *62.tif* ]] || [[ "$i" == *nn62.tif* ]] || [[ "$i" == *62.gz* ]]; then
+			elif [[ "$i" == *B62* ]] || [[  "$i" == *62.tif* ]] ||  [[ "$i" == *62.tif* ]] || [[ "$i" == *B6_VCID_2.TIF* ]] ||  [[ "$i" == *nn62.tif* ]] || [[ "$i" == *62.gz* ]]; then
 				createTMSforBandWithFileName $i
 						#B60
-			 elif [[ "$i" == *B60* ]] || [[  "$i" == *60.tif* ]] ||  [[ "$i" == *06.tif* ]] || [[ "$i" == *nn6.gz* ]] || [[ "$i" == *06.gz* ]]; then		
+			 elif [[ "$i" == *B60* ]] || [[  "$i" == *60.tif* ]] ||  [[ "$i" == *06.tif* ]] || [[ "$i" == *B6.TIF* ]] ||  [[ "$i" == *nn6.gz* ]] || [[ "$i" == *06.gz* ]]; then		
 				createTMSforBandWithFileName $i 
 			#B70
-			elif [[ "$i" == *B70* ]] || [[  "$i" == *70.tif* ]] ||  [[ "$i" == *07.tif* ]] || [[ "$i" == *nn7.tif* ]] || [[ "$i" == *07.gz* ]]; then
+			elif [[ "$i" == *B70* ]] || [[  "$i" == *70.tif* ]] ||  [[ "$i" == *07.tif* ]] || [[ "$i" == *B7.TIF* ]] ||  [[ "$i" == *nn7.tif* ]] || [[ "$i" == *07.gz* ]]; then
 				createTMSforBandWithFileName $i
 				#B80
-			elif [[ "$i" == *B80* ]] || [[  "$i" == *80.tif* ]] ||  [[ "$i" == *08.tif* ]] || [[ "$i" == *nn8.gz* ]] || [[ "$i" == *08.gz* ]]; then
+			elif [[ "$i" == *B80* ]] || [[  "$i" == *80.tif* ]] ||  [[ "$i" == *08.tif* ]] || [[ "$i" == *B8.TIF* ]] ||  [[ "$i" == *nn8.gz* ]] || [[ "$i" == *08.gz* ]]; then
 				createTMSforBandWithFileName $i 	   					
   			fi
   		done

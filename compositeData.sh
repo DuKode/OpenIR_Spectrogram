@@ -78,28 +78,34 @@ createTMSLayerWithDirectoriesAndDestinationAndBandCombinations()
 					# echo "tiledirectory = $tiledirectory"
 					#assign the tms bands directories to the variables. 
 					############# GLS2005 ############# || #### EarthSat-Orthorectified ### || ################# USGS ######## || ############# GLS2000 ###########
-					if [[ "$tiledirectory" == *B10* ]]  || [[ "$tiledirectory" == *nn10* ]] || [[ "$tiledirectory" == *nn1* ]] || [[ "$tiledirectory" == *_10* ]] || [[ "$tiledirectory" == *b01 ]]; then 
+					if [[ "$tiledirectory" == *B10* ]]  || [[ "$tiledirectory" == *nn10* ]] || [[ "$tiledirectory" == *nn1* ]] || [[ "$tiledirectory" == *_10* ]] || [[ "$tiledirectory" == *b01 ]] || [[ "$tiledirectory" == *_B1 ]]; then 
 						# echo "tiled directory10 "
 						band10="$tiledirectory"
-					elif [[ "$tiledirectory" == *B20* ]] || [[ "$tiledirectory" == *nn20* ]] || [[ "$tiledirectory" == *nn2* ]] || [[ "$tiledirectory" == *_20* ]] || [[ "$tiledirectory" == *b02* ]]; then 
+					elif [[ "$tiledirectory" == *B20* ]] || [[ "$tiledirectory" == *nn20* ]] || [[ "$tiledirectory" == *nn2* ]] || [[ "$tiledirectory" == *_20* ]] || [[ "$tiledirectory" == *b02* ]] || [[ "$tiledirectory" == *_B2 ]]; then 
 						# echo "tiled directory20"
 						 band20="$tiledirectory"
-					elif [[ "$tiledirectory" == *B30* ]] || [[ "$tiledirectory" == *nn30* ]] || [[ "$tiledirectory" == *nn3* ]] || [[ "$tiledirectory" == *_30* ]] || [[ "$tiledirectory" == *b03* ]]; then 
+					elif [[ "$tiledirectory" == *B30* ]] || [[ "$tiledirectory" == *nn30* ]] || [[ "$tiledirectory" == *nn3* ]] || [[ "$tiledirectory" == *_30* ]] || [[ "$tiledirectory" == *b03* ]] || [[ "$tiledirectory" == *_B3 ]]; then 
 						# echo "tiled directory30"
 						band30="$tiledirectory"
-					elif [[ "$tiledirectory" == *B40* ]] || [[ "$tiledirectory" == *nn40* ]] || [[ "$tiledirectory" == *nn4* ]] || [[ "$tiledirectory" == *_40* ]] || [[ "$tiledirectory" == *b04* ]]; then 
+					elif [[ "$tiledirectory" == *B40* ]] || [[ "$tiledirectory" == *nn40* ]] || [[ "$tiledirectory" == *nn4* ]] || [[ "$tiledirectory" == *_40* ]] || [[ "$tiledirectory" == *b04* ]] || [[ "$tiledirectory" == *_B4* ]]; then 
 						# echo "tiled directory40"
 						band40="$tiledirectory"
-					elif [[ "$tiledirectory" == *B50* ]] || [[ "$tiledirectory" == *nn50* ]] || [[ "$tiledirectory" == *nn5* ]] || [[ "$tiledirectory" == *_50* ]] || [[ "$tiledirectory" == *b05* ]]; then 
+					elif [[ "$tiledirectory" == *B50* ]] || [[ "$tiledirectory" == *nn50* ]] || [[ "$tiledirectory" == *nn5* ]] || [[ "$tiledirectory" == *_50* ]] || [[ "$tiledirectory" == *b05* ]] || [[ "$tiledirectory" == *_B5* ]]; then 
 						# echo "tiled directory50"
 						band50="$tiledirectory"
-					elif [[ "$tiledirectory" == *B60* ]] || [[ "$tiledirectory" == *nn60* ]] || [[ "$tiledirectory" == *nn6* ]] || [[ "$tiledirectory" == *_60* ]] || [[ "$tiledirectory" == *b06* ]]; then 
+					elif [[ "$tiledirectory" == *B60* ]] || [[ "$tiledirectory" == *nn60* ]] || [[ "$tiledirectory" == *nn6* ]] || [[ "$tiledirectory" == *_60* ]] || [[ "$tiledirectory" == *b06* ]] || [[ "$tiledirectory" == *_B6* ]]; then 
 						# echo "tiled directory60"
 						band60="$tiledirectory"
-					elif [[ "$tiledirectory" == *B70* ]] || [[ "$tiledirectory" == *nn70* ]] || [[ "$tiledirectory" == *nn7* ]] || [[ "$tiledirectory" == *_70* ]] || [[ "$tiledirectory" == *b07* ]]; then 
+						elif [[ "$tiledirectory" == *B61* ]] || [[ "$tiledirectory" == *B6_VCID_1* ]]; then 
+							# echo "tiled directory60"
+							band61="$tiledirectory"
+						elif [[ "$tiledirectory" == *B62* ]] || [[ "$tiledirectory" == *B6_VCID_2* ]]; then 
+							# echo "tiled directory60"
+							band62="$tiledirectory"
+					elif [[ "$tiledirectory" == *B70* ]] || [[ "$tiledirectory" == *nn70* ]] || [[ "$tiledirectory" == *nn7* ]] || [[ "$tiledirectory" == *_70* ]] || [[ "$tiledirectory" == *b07* ]] || [[ "$tiledirectory" == *_B7* ]]; then 
 						# echo "tiled directory70"
 						band70="$tiledirectory"
-					elif [[ "$tiledirectory" == *B80* ]] || [[ "$tiledirectory" == *nn80* ]] || [[ "$tiledirectory" == *nn8* ]] || [[ "$tiledirectory" == *_80* ]] || [[ "$tiledirectory" == *b08* ]]; then 
+					elif [[ "$tiledirectory" == *B80* ]] || [[ "$tiledirectory" == *nn80* ]] || [[ "$tiledirectory" == *nn8* ]] || [[ "$tiledirectory" == *_80* ]] || [[ "$tiledirectory" == *b08* ]] || [[ "$tiledirectory" == *_B8* ]]; then 
 						# echo "tiled directory70"
 						band80="$tiledirectory"
 					fi
@@ -243,37 +249,37 @@ for directory in ${Directories[@]}; do
 		do
 		
 				if [ -d $tiledirectory ]; then 
-					# echo "tiledirectory = $tiledirectory"
+					 echo "tiledirectory = $tiledirectory"
 					#assign the tms bands directories to the variables. 
 					############# GLS2005 ############# || #### EarthSat-Orthorectified ### || ################# USGS ######## || ############# GLS2000 ###########
-					if [[ "$tiledirectory" == *B10* ]]  || [[ "$tiledirectory" == *nn10* ]] || [[ "$tiledirectory" == *nn1* ]] || [[ "$tiledirectory" == *_10* ]] || [[ "$tiledirectory" == *b01 ]]; then 
+					if [[ "$tiledirectory" == *B10* ]]  || [[ "$tiledirectory" == *nn10* ]] || [[ "$tiledirectory" == *nn1* ]] || [[ "$tiledirectory" == *_10* ]] || [[ "$tiledirectory" == *b01 ]] || [[ "$tiledirectory" == *_B1 ]]; then 
 						# echo "tiled directory10 "
 						band10="$tiledirectory"
-					elif [[ "$tiledirectory" == *B20* ]] || [[ "$tiledirectory" == *nn20* ]] || [[ "$tiledirectory" == *nn2* ]] || [[ "$tiledirectory" == *_20* ]] || [[ "$tiledirectory" == *b02* ]]; then 
+					elif [[ "$tiledirectory" == *B20* ]] || [[ "$tiledirectory" == *nn20* ]] || [[ "$tiledirectory" == *nn2* ]] || [[ "$tiledirectory" == *_20* ]] || [[ "$tiledirectory" == *b02* ]] || [[ "$tiledirectory" == *_B2 ]]; then 
 						# echo "tiled directory20"
 						 band20="$tiledirectory"
-					elif [[ "$tiledirectory" == *B30* ]] || [[ "$tiledirectory" == *nn30* ]] || [[ "$tiledirectory" == *nn3* ]] || [[ "$tiledirectory" == *_30* ]] || [[ "$tiledirectory" == *b03* ]]; then 
+					elif [[ "$tiledirectory" == *B30* ]] || [[ "$tiledirectory" == *nn30* ]] || [[ "$tiledirectory" == *nn3* ]] || [[ "$tiledirectory" == *_30* ]] || [[ "$tiledirectory" == *b03* ]] || [[ "$tiledirectory" == *_B3 ]]; then 
 						# echo "tiled directory30"
 						band30="$tiledirectory"
-					elif [[ "$tiledirectory" == *B40* ]] || [[ "$tiledirectory" == *nn40* ]] || [[ "$tiledirectory" == *nn4* ]] || [[ "$tiledirectory" == *_40* ]] || [[ "$tiledirectory" == *b04* ]]; then 
+					elif [[ "$tiledirectory" == *B40* ]] || [[ "$tiledirectory" == *nn40* ]] || [[ "$tiledirectory" == *nn4* ]] || [[ "$tiledirectory" == *_40* ]] || [[ "$tiledirectory" == *b04* ]] || [[ "$tiledirectory" == *_B4* ]]; then 
 						# echo "tiled directory40"
 						band40="$tiledirectory"
-					elif [[ "$tiledirectory" == *B50* ]] || [[ "$tiledirectory" == *nn50* ]] || [[ "$tiledirectory" == *nn5* ]] || [[ "$tiledirectory" == *_50* ]] || [[ "$tiledirectory" == *b05* ]]; then 
+					elif [[ "$tiledirectory" == *B50* ]] || [[ "$tiledirectory" == *nn50* ]] || [[ "$tiledirectory" == *nn5* ]] || [[ "$tiledirectory" == *_50* ]] || [[ "$tiledirectory" == *b05* ]] || [[ "$tiledirectory" == *_B5* ]]; then 
 						# echo "tiled directory50"
 						band50="$tiledirectory"
-					elif [[ "$tiledirectory" == *B60* ]] || [[ "$tiledirectory" == *nn60* ]] || [[ "$tiledirectory" == *nn6* ]] || [[ "$tiledirectory" == *_60* ]] || [[ "$tiledirectory" == *b06* ]]; then 
-						# echo "tiled directory60"
-						band60="$tiledirectory"
-						elif [[ "$tiledirectory" == *B61* ]] ; then 
+					# elif [[ "$tiledirectory" == *B60* ]] || [[ "$tiledirectory" == *nn60* ]] || [[ "$tiledirectory" == *nn6* ]] || [[ "$tiledirectory" == *_60* ]] || [[ "$tiledirectory" == *b06* ]] || [[ "$tiledirectory" == *_B6* ]]; then 
+					# 	# echo "tiled directory60"
+					# 	band60="$tiledirectory"
+					elif [[ "$tiledirectory" == *B61* ]] || [[ "$tiledirectory" == *B6_VCID_1 ]];then 
 							# echo "tiled directory60"
-							band61="$tiledirectory"
-						elif [[ "$tiledirectory" == *B62* ]] ; then 
+						band61="$tiledirectory"
+					elif [[ "$tiledirectory" == *B62* ]] || [[ "$tiledirectory" == *B6_VCID_2 ]]; then 
 							# echo "tiled directory60"
-							band62="$tiledirectory"
-					elif [[ "$tiledirectory" == *B70* ]] || [[ "$tiledirectory" == *nn70* ]] || [[ "$tiledirectory" == *nn7* ]] || [[ "$tiledirectory" == *_70* ]] || [[ "$tiledirectory" == *b07* ]]; then 
+						band62="$tiledirectory"
+					elif [[ "$tiledirectory" == *B70* ]] || [[ "$tiledirectory" == *nn70* ]] || [[ "$tiledirectory" == *nn7* ]] || [[ "$tiledirectory" == *_70* ]] || [[ "$tiledirectory" == *b07* ]] || [[ "$tiledirectory" == *_B7* ]]; then 
 						# echo "tiled directory70"
 						band70="$tiledirectory"
-					elif [[ "$tiledirectory" == *B80* ]] || [[ "$tiledirectory" == *nn80* ]] || [[ "$tiledirectory" == *nn8* ]] || [[ "$tiledirectory" == *_80* ]] || [[ "$tiledirectory" == *b08* ]]; then 
+					elif [[ "$tiledirectory" == *B80* ]] || [[ "$tiledirectory" == *nn80* ]] || [[ "$tiledirectory" == *nn8* ]] || [[ "$tiledirectory" == *_80* ]] || [[ "$tiledirectory" == *b08* ]] || [[ "$tiledirectory" == *_B8* ]]; then 
 						# echo "tiled directory70"
 						band80="$tiledirectory"
 					fi
@@ -296,23 +302,23 @@ for directory in ${Directories[@]}; do
 					# band 6 has issues 
 				elif [[ $bandCombination == "666" ]]; then  
 					bands=($band60 $band60 $band60);
-					# 
+					#
 				elif [[ $bandCombination == "61" ]]; then  
-						bands=($band61 $band61 $band61);
+					bands=($band61 $band61 $band61);
 				elif [[ $bandCombination == "62" ]]; then  
-						bands=($band62 $band62 $band62);
+					bands=($band62 $band62 $band62);
 				elif [[ $bandCombination == "777" ]]; then 
 					bands=($band70 $band70 $band70);
 				elif [[ $bandCombination == "888" ]]; then 
 					bands=($band80 $band80 $band80);
 				fi
-		# echo "bands array = ${bands[@]}" 
+		echo "bands array = ${bands[@]}" 
 		tLen=${#bands[@]}
 		if [[ $tLen != "3" ]]
 		then 
 			echo "bandCombination: $bandCombination"
 			echo "bands: ${#bands[@]}"
-			echo "$band80 "
+			# echo "$band80 "
 			echo "error: band combimation array is not setup properly, check your TMS layers to identify missing data"
 			exit 0 
 		fi
@@ -426,43 +432,43 @@ deps # check dependencies imagemagick-convert
 # 
 echo "\n "
 # 
-for i in ${args[@]}; do
- 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "321" "321" "$i"
-done 
-
-for i in ${args[@]}; do
-	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "432" "432" "$i"
-done 
-
-for i in ${args[@]}; do
-	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "543" "543" "$i"
-done 
-
-for i in ${args[@]}; do
-	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "453" "453" "$i"
-done 
+# for i in ${args[@]}; do
+#  	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "321" "321" "$i"
+# done 
 # 
-for i in ${args[@]}; do
-	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "754" "754" "$i"
-done 
-
-
-
+# for i in ${args[@]}; do
+# 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "432" "432" "$i"
+# done 
 # 
-# echo "\n"
+# for i in ${args[@]}; do
+# 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "543" "543" "$i"
+# done 
 # 
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "111" "111"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "222" "222"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "333" "333"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "444" "444"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "555" "555"
+# for i in ${args[@]}; do
+# 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "453" "453" "$i"
+# done 
+# # 
+# for i in ${args[@]}; do
+# 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "754" "754" "$i"
+# done 
+# 
+# 
+# 
+# # 
+# # echo "\n"
+# # 
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "111" "111"
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "222" "222"
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "333" "333"
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "444" "444"
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "555" "555"
 
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "61" "61"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "62" "62"
+ createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "61" "61"
+ createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "62" "62"
 
 # # createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "666" "666" #band b06 is missing in some files and only b61 and b62 exist. 
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "777" "777"
-createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "888" "888" #band80 is not processed as of now. 
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "777" "777"
+# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "888" "888" #band80 is not processed as of now. 
 
 echo "\n"
 exit 0 
