@@ -94,7 +94,7 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=15
+maxZoom=16
 minZoom=11
 
 n=-1
