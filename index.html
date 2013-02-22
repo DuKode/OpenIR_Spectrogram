@@ -804,6 +804,7 @@ svg , g
                                         //DN to radiance.... 
                                         //http://cwcaribbean.aoml.noaa.gov/bilko/module7/lesson3/
                                         var gain = (lmax/254)-(lmin/255); 
+                                        console.log("gain= " + gain);
                                         var bias = lmin; 
                                         var radiance = (gain * DN) + bias;
                                         // Lλ is the cell value as radiance
@@ -1078,7 +1079,7 @@ svg , g
                                             Spectraldataline = d3.svg.line()
                                               .x(function(d) { return x(d.x+(d.xe-d.x)/2); })
                                               .y(function(d) { return y(d.y); })
-                                              // .interpolate("basis");
+                                               .interpolate("basis");
                                             d3.selectAll("path.dataline")    
                                                    .data([data])            
                                                    .attr("d", Spectraldataline) ;

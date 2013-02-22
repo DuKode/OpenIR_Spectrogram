@@ -417,8 +417,8 @@ args=("$@")
 NUM1=$#
 NUM2=2
 
-maxZoom=10
-minZoom=5
+maxZoom=14
+minZoom=10
 deps # check dependencies imagemagick-convert 
  n=-1
  for i in ${args[@]}; do
@@ -451,24 +451,24 @@ echo "\n "
 # for i in ${args[@]}; do
 # 	createTMSLayerWithDirectoriesAndDestinationAndBandCombinations "754" "754" "$i"
 # done 
+
+
+
 # 
+# echo "\n"
 # 
-# 
-# # 
-# # echo "\n"
-# # 
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "111" "111"
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "222" "222"
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "333" "333"
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "444" "444"
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "555" "555"
+#createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "111" "111"
+#createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "222" "222"
+#createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "333" "333"
+createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "444" "444"
+createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "555" "555"
 
  createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "61" "61"
  createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "62" "62"
 
 # # createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "666" "666" #band b06 is missing in some files and only b61 and b62 exist. 
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "777" "777"
-# createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "888" "888" #band80 is not processed as of now. 
+ createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "777" "777"
+ createTMSLayerWithDirectoriesAndDestinationAndBandCombinations_singleBand "888" "888" #band80 is not processed as of now. 
 
 echo "\n"
 exit 0 
